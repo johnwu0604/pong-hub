@@ -104,98 +104,30 @@
       var handOutput = document.getElementById("handData");
       var handString = "";
       if (frame.hands.length > 0) {
-        if ( frame.hands.length === 2 ) {
-          for (var i = 0; i < frame.hands.length; i++) {
-            var hand = frame.hands[i];
 
-            handString += "<div style='width:300px; float:left; padding:5px'>";
-            handString += "Hand ID: " + hand.id + "<br />";
-            handString += "Type: " + hand.type + " hand" + "<br />";
-            handString += "Direction: " + vectorToString(hand.direction, 2) + "<br />";
-            handString += "Palm position: " + hand.palmPosition[1] + " mm<br />";
-            handString += "Palm position: " + hand.palmPosition[0] + " mm<br />";
-            handString += "Palm velocity: " + hand.palmVelocity + "<br />";
+        for (var i = 0; i < frame.hands.length; i++) {
+          var hand = frame.hands[i];
 
-            // Hand motion factors
-            if (previousFrame && previousFrame.valid) {
-              var translation = hand.translation(previousFrame);
-              handString += "Translation: " + vectorToString(translation) + " mm<br />";
+          handString += "<div style='width:300px; float:left; padding:5px'>";
+          handString += "Hand ID: " + hand.id + "<br />";
+          handString += "Type: " + hand.type + " hand" + "<br />";
+          handString += "Direction: " + vectorToString(hand.direction, 2) + "<br />";
+          handString += "Palm position: " + hand.palmPosition[1] + " mm<br />";
+          handString += "Palm position: " + hand.palmPosition[0] + " mm<br />";
+          handString += "Palm velocity: " + hand.palmVelocity + "<br />";
 
-              console.log(parseFloat(translation[1]));
+          // Hand motion factors
+          if (previousFrame && previousFrame.valid) {
+            var translation = hand.translation(previousFrame);
+            handString += "Translation: " + vectorToString(translation) + " mm<br />";
 
-              var sensitivity = 8;
-              var threshold = 1.8;
+            console.log(parseFloat(translation[1]));
 
-              if ( i === 0) {
-                if (parseFloat(translation[1]) * sensitivity < -threshold ) {
-                  pong.leftPaddle.stopMovingUp()
-                  pong.leftPaddle.moveDown()
-                } else if (parseFloat(translation[1]) * sensitivity > threshold) {
-                  pong.leftPaddle.stopMovingDown()
-                  pong.leftPaddle.moveUp()
-                } else {
-                  pong.leftPaddle.stopMovingDown();
-                }
-              }
+            var sensitivity = 7;
+            var threshold = 1.8;
 
-              if ( i === 1) {
-                if (parseFloat(translation[1]) * sensitivity < -threshold ) {
-                  pong.rightPaddle.stopMovingUp()
-                  pong.rightPaddle.moveDown()
-                } else if (parseFloat(translation[1]) * sensitivity > threshold) {
-                  pong.rightPaddle.stopMovingDown()
-                  pong.rightPaddle.moveUp()
-                } else {
-                  pong.rightPaddle.stopMovingDown();
-                }
-              }
-
-              var rotationAxis = hand.rotationAxis(previousFrame, 2);
-              var rotationAngle = hand.rotationAngle(previousFrame);
-              handString += "Rotation axis: " + vectorToString(rotationAxis) + "<br />";
-              handString += "Rotation angle: " + rotationAngle.toFixed(2) + " radians<br />";
-
-              var scaleFactor = hand.scaleFactor(previousFrame);
-              handString += "Scale factor: " + scaleFactor.toFixed(2) + "<br />";
-            }
-
-            // IDs of pointables associated with this hand
-            if (hand.pointables.length > 0) {
-              var fingerIds = [];
-              for (var j = 0; j < hand.pointables.length; j++) {
-                var pointable = hand.pointables[j];
-                fingerIds.push(pointable.id);
-              }
-              if (fingerIds.length > 0) {
-                handString += "Fingers IDs: " + fingerIds.join(", ") + "<br />";
-              }
-            }
-
-            handString += "</div>";
-          }
-        } else {
-          for (var i = 0; i < frame.hands.length; i++) {
-            var hand = frame.hands[i];
-
-            handString += "<div style='width:300px; float:left; padding:5px'>";
-            handString += "Hand ID: " + hand.id + "<br />";
-            handString += "Type: " + hand.type + " hand" + "<br />";
-            handString += "Direction: " + vectorToString(hand.direction, 2) + "<br />";
-            handString += "Palm position: " + hand.palmPosition[1] + " mm<br />";
-            handString += "Palm position: " + hand.palmPosition[0] + " mm<br />";
-            handString += "Palm velocity: " + hand.palmVelocity + "<br />";
-
-            // Hand motion factors
-            if (previousFrame && previousFrame.valid) {
-              var translation = hand.translation(previousFrame);
-              handString += "Translation: " + vectorToString(translation) + " mm<br />";
-
-              console.log(parseFloat(translation[1]));
-
-              var sensitivity = 8;
-              var threshold = 1.8;
-
-              if (parseFloat(translation[1]) * sensitivity < -threshold ) {
+            if ( parseFloat(hand.palmPosition[0]) < 0 ) {
+              if (parseFloat(translation[1]) * sensitivity < -threshold) {
                 pong.leftPaddle.stopMovingUp()
                 pong.leftPaddle.moveDown()
               } else if (parseFloat(translation[1]) * sensitivity > threshold) {
@@ -204,32 +136,43 @@
               } else {
                 pong.leftPaddle.stopMovingDown();
               }
-
-              var rotationAxis = hand.rotationAxis(previousFrame, 2);
-              var rotationAngle = hand.rotationAngle(previousFrame);
-              handString += "Rotation axis: " + vectorToString(rotationAxis) + "<br />";
-              handString += "Rotation angle: " + rotationAngle.toFixed(2) + " radians<br />";
-
-              var scaleFactor = hand.scaleFactor(previousFrame);
-              handString += "Scale factor: " + scaleFactor.toFixed(2) + "<br />";
             }
 
-            // IDs of pointables associated with this hand
-            if (hand.pointables.length > 0) {
-              var fingerIds = [];
-              for (var j = 0; j < hand.pointables.length; j++) {
-                var pointable = hand.pointables[j];
-                fingerIds.push(pointable.id);
-              }
-              if (fingerIds.length > 0) {
-                handString += "Fingers IDs: " + fingerIds.join(", ") + "<br />";
+            if ( parseFloat(hand.palmPosition[0]) > 0  ) {
+              if (parseFloat(translation[1]) * sensitivity < -threshold) {
+                pong.rightPaddle.stopMovingUp()
+                pong.rightPaddle.moveDown()
+              } else if (parseFloat(translation[1]) * sensitivity > threshold) {
+                pong.rightPaddle.stopMovingDown()
+                pong.rightPaddle.moveUp()
+              } else {
+                pong.rightPaddle.stopMovingDown();
               }
             }
 
-            handString += "</div>";
+            var rotationAxis = hand.rotationAxis(previousFrame, 2);
+            var rotationAngle = hand.rotationAngle(previousFrame);
+            handString += "Rotation axis: " + vectorToString(rotationAxis) + "<br />";
+            handString += "Rotation angle: " + rotationAngle.toFixed(2) + " radians<br />";
+
+            var scaleFactor = hand.scaleFactor(previousFrame);
+            handString += "Scale factor: " + scaleFactor.toFixed(2) + "<br />";
           }
-        }
 
+          // IDs of pointables associated with this hand
+          if (hand.pointables.length > 0) {
+            var fingerIds = [];
+            for (var j = 0; j < hand.pointables.length; j++) {
+              var pointable = hand.pointables[j];
+              fingerIds.push(pointable.id);
+            }
+            if (fingerIds.length > 0) {
+              handString += "Fingers IDs: " + fingerIds.join(", ") + "<br />";
+            }
+          }
+
+          handString += "</div>";
+        }
       }
       else {
         handString += "No hands";

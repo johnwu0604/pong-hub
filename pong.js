@@ -449,8 +449,8 @@ Pong = {
       }
     },
 
-    moveUp:         function() { this.up   = 1.25; },
-    moveDown:       function() { this.down = 1.25; },
+    moveUp:         function() { this.up   = 1.5; },
+    moveDown:       function() { this.down = 1.5; },
     stopMovingUp:   function() { this.up   = 0; },
     stopMovingDown: function() { this.down = 0; }
 
