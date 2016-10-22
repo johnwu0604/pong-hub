@@ -79,6 +79,11 @@
       predictions: predictions.checked
     });
 
+    Game.addEvent(sound,       'change', function() { pong.enableSound(sound.checked);           });
+    Game.addEvent(stats,       'change', function() { pong.showStats(stats.checked);             });
+    Game.addEvent(footprints,  'change', function() { pong.showFootprints(footprints.checked);   });
+    Game.addEvent(predictions, 'change', function() { pong.showPredictions(predictions.checked); });
+
     // Store frame for motion functions
     var previousFrame = null;
     var paused = false;
@@ -116,7 +121,18 @@
 
             console.log(parseFloat(translation[1]));
 
-           // parseFloat(translation[1]) ? pong.moveUp() : pong.moveDown();
+            var sensitivity = 8;
+            var threshold = 1.8;
+
+            if (parseFloat(translation[1]) * sensitivity < -threshold ) {
+              pong.leftPaddle.stopMovingUp()
+              pong.leftPaddle.moveDown()
+            } else if (parseFloat(translation[1]) * sensitivity > threshold) {
+              pong.leftPaddle.stopMovingDown()
+              pong.leftPaddle.moveUp()
+            } else {
+              pong.leftPaddle.stopMovingDown();
+            }
 
             var rotationAxis = hand.rotationAxis(previousFrame, 2);
             var rotationAngle = hand.rotationAngle(previousFrame);
@@ -159,11 +175,6 @@
                  + vector[1].toFixed(digits) + ", "
                  + vector[2].toFixed(digits) + ")";
     }
-
-    Game.addEvent(sound,       'change', function() { pong.enableSound(sound.checked);           });
-    Game.addEvent(stats,       'change', function() { pong.showStats(stats.checked);             });
-    Game.addEvent(footprints,  'change', function() { pong.showFootprints(footprints.checked);   });
-    Game.addEvent(predictions, 'change', function() { pong.showPredictions(predictions.checked); });
 
   });
   </script>
