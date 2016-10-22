@@ -12,12 +12,13 @@
 
     <h2>Leap Motion Pong!</h2>
 
-    <div id="handData"></div>
-
     <div class='description'>
       <p>
         This is a leap motion version of Pong.
       </p>
+
+      <div id="handData"></div>
+
       <p>
         Press <b>1</b> for a single player game.<br>
         Press <b>2</b> for a double player game.<br>
@@ -108,25 +109,16 @@
         for (var i = 0; i < frame.hands.length; i++) {
           var hand = frame.hands[i];
 
-          handString += "<div style='width:300px; float:left; padding:5px'>";
-          handString += "Hand ID: " + hand.id + "<br />";
-          handString += "Type: " + hand.type + " hand" + "<br />";
-          handString += "Direction: " + vectorToString(hand.direction, 2) + "<br />";
-          handString += "Palm position: " + hand.palmPosition[1] + " mm<br />";
-          handString += "Palm position: " + hand.palmPosition[0] + " mm<br />";
-          handString += "Palm velocity: " + hand.palmVelocity + "<br />";
-
           // Hand motion factors
           if (previousFrame && previousFrame.valid) {
             var translation = hand.translation(previousFrame);
-            handString += "Translation: " + vectorToString(translation) + " mm<br />";
-
-            console.log(parseFloat(translation[1]));
-
             var sensitivity = 7;
             var threshold = 1.8;
 
+            handString += "<div style='width:300px; float:left; padding:5px'>";
+
             if ( parseFloat(hand.palmPosition[0]) < 0 ) {
+              handString += "Paddle: Left <br/>";
               if (parseFloat(translation[1]) * sensitivity < -threshold) {
                 pong.leftPaddle.stopMovingUp()
                 pong.leftPaddle.moveDown()
@@ -139,6 +131,7 @@
             }
 
             if ( parseFloat(hand.palmPosition[0]) > 0  ) {
+              handString += "Paddle: Right <br/>";
               if (parseFloat(translation[1]) * sensitivity < -threshold) {
                 pong.rightPaddle.stopMovingUp()
                 pong.rightPaddle.moveDown()
@@ -149,26 +142,9 @@
                 pong.rightPaddle.stopMovingDown();
               }
             }
-
-            var rotationAxis = hand.rotationAxis(previousFrame, 2);
-            var rotationAngle = hand.rotationAngle(previousFrame);
-            handString += "Rotation axis: " + vectorToString(rotationAxis) + "<br />";
-            handString += "Rotation angle: " + rotationAngle.toFixed(2) + " radians<br />";
-
-            var scaleFactor = hand.scaleFactor(previousFrame);
-            handString += "Scale factor: " + scaleFactor.toFixed(2) + "<br />";
-          }
-
-          // IDs of pointables associated with this hand
-          if (hand.pointables.length > 0) {
-            var fingerIds = [];
-            for (var j = 0; j < hand.pointables.length; j++) {
-              var pointable = hand.pointables[j];
-              fingerIds.push(pointable.id);
-            }
-            if (fingerIds.length > 0) {
-              handString += "Fingers IDs: " + fingerIds.join(", ") + "<br />";
-            }
+            handString += "Type: " + hand.type + " hand" + "<br />";
+            handString += "Palm position (y) : " + hand.palmPosition[1] + " mm<br />";
+            handString += "Palm position (x): " + hand.palmPosition[0] + " mm<br />";
           }
 
           handString += "</div>";
