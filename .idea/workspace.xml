@@ -4,7 +4,6 @@
     <list default="true" id="87a32f6e-773d-4874-97ff-ed15a9b689a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pong.js" afterPath="$PROJECT_DIR$/pong.js" />
     </list>
     <ignored path="pong.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,10 +28,11 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+            <state relative-caret-position="460">
+              <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
               <folding>
-                <marker date="1477155746000" expanded="true" signature="3383:3419" ph="..." />
+                <marker date="1477158081000" expanded="true" signature="3431:3467" ph="..." />
+                <marker date="1477158081000" expanded="true" signature="6448:6484" ph="..." />
               </folding>
             </state>
           </provider>
@@ -632,12 +632,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1477146824611</updated>
-      <workItem from="1477146827373" duration="8208000" />
+      <workItem from="1477146827373" duration="9896000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8208000" />
+    <option name="totallyTimeSpent" value="9896000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="35" y="23" width="1400" height="781" extended-state="0" />
@@ -707,10 +707,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
+        <state relative-caret-position="460">
+          <caret line="186" column="0" selection-start-line="186" selection-start-column="0" selection-end-line="186" selection-end-column="0" />
           <folding>
-            <marker date="1477155746000" expanded="true" signature="3383:3419" ph="..." />
+            <marker date="1477158081000" expanded="true" signature="3431:3467" ph="..." />
+            <marker date="1477158081000" expanded="true" signature="6448:6484" ph="..." />
           </folding>
         </state>
       </provider>
