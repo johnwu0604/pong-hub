@@ -8,8 +8,8 @@ Pong = {
     width:        640,   // logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
     height:       480,   // logical canvas height (ditto)
     wallWidth:    12,
-    paddleWidth:  12,
-    paddleHeight: 60,
+    paddleWidth:  53,
+    paddleHeight: 53,
     paddleSpeed:  2,     // should be able to cross court vertically   in 2 seconds
     ballSpeed:    4,     // should be able to cross court horizontally in 4 seconds, at starting speed ...
     ballAccel:    8,     // ... but accelerate as time passes
@@ -141,7 +141,7 @@ Pong = {
   draw: function(ctx) {
     this.court.draw(ctx, this.scores[0], this.scores[1]);
     this.leftPaddle.draw(ctx);
-    this.rightPaddle.draw(ctx);
+    this.rightPaddle.draw(ctx, true);
     if (this.playing)
       this.ball.draw(ctx);
     else
@@ -438,9 +438,16 @@ Pong = {
       }
     },
 
-    draw: function(ctx) {
-      ctx.fillStyle = Pong.Colors.walls;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+    draw: function(ctx, rhs) {
+
+      var img = new Image();
+      if(rhs){
+        img.src = "images/Trump.png";
+      }else{
+        img.src = "images/Clinton.png";
+      }
+      ctx.drawImage(img, this.x, this.y);
+      // ctx.fillRect(this.x, this.y, this.width, this.height);
       if (this.prediction && this.pong.cfg.predictions) {
         ctx.strokeStyle = Pong.Colors.predictionExact;
         ctx.strokeRect(this.prediction.x - this.prediction.radius, this.prediction.exactY - this.prediction.radius, this.prediction.radius*2, this.prediction.radius*2);
