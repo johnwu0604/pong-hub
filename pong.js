@@ -439,8 +439,10 @@ Pong = {
     },
 
     draw: function(ctx) {
-      ctx.fillStyle = Pong.Colors.walls;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      var img = new Image();
+      img.src = "Clinton.png";
+      ctx.drawImage(img, this.x, this.y);
+      // ctx.fillRect(this.x, this.y, this.width, this.height);
       if (this.prediction && this.pong.cfg.predictions) {
         ctx.strokeStyle = Pong.Colors.predictionExact;
         ctx.strokeRect(this.prediction.x - this.prediction.radius, this.prediction.exactY - this.prediction.radius, this.prediction.radius*2, this.prediction.radius*2);
