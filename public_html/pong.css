@@ -18,7 +18,7 @@ body { background-color: black; color: #AAA; font-size: 12pt; padding: 1em; }
 #sidebar .settings input        { vertical-align: middle; }
 #sidebar .settings select       { vertical-align: middle; }
 #sidebar .description           { margin-bottom: 2em; }
-#sidebar .description b         { font-weight: normal; color: #FFF; }
+#sidebar .description b         { font-weight: normal; color: #FFF; font: arial;}
 
 
 @media screen and (min-width: 0px) {

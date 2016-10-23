@@ -10,11 +10,12 @@
 
   <div id="sidebar">
 
-    <h2>Leap Motion Pong!</h2>
+    <h2>WELCOME TO PONGHUB PREMIUM: THE PRESIDENTIAL EDITION</h2>
 
     <div class='description'>
       <p>
-        This is a leap motion version of Pong.
+        PongHub.org is a web application developed for optimized usage with the Orion Leap Motion augmented reality interface. Come discover
+        our AR twist on a historical classic, cherished by many a knowledgeable gaming enthusiast **Alternate keyboard controls included**
       </p>
 
       <div id="handData"></div>
@@ -25,11 +26,15 @@
         Press <b>0</b> to watch the computer play itself.
       </p>
       <p>
+        <br>
+        *** ALTERNATE KEYBOARD CONTROLS ***
+        <br>
+        <br>
         Player 1 moves using the <b>Q</b> and <b>A</b> keys.<br>
         Player 2 moves using the <b>P</b> and <b>L</b> keys.
       </p>
       <p>
-        <b>Esc</b> can be used to abandon a game.
+        <b>Esc</b> can be used to abandon a game (but can you really abandon America?)
       </p>
     </div>
 
@@ -43,15 +48,15 @@
       <input type='checkbox' id='stats' checked>
     </div>
 
-    <div class='settings'>
-      <label for='footprints'>footprints: </label>
-      <input type='checkbox' id='footprints'>
-    </div>
+    <!--<div class='settings'>-->
+      <!--<label for='footprints'>footprints: </label>-->
+      <!--<input type='checkbox' id='footprints'>-->
+    <!--</div>-->
 
-    <div class='settings'>
-      <label for='predictions'>predictions: </label>
-      <input type='checkbox' id='predictions'>
-    </div>
+    <!--<div class='settings'>-->
+      <!--<label for='predictions'>predictions: </label>-->
+      <!--<input type='checkbox' id='predictions'>-->
+    <!--</div>-->
 
   </div>
 
@@ -76,14 +81,13 @@
     var pong = Game.start('game', Pong, {
       sound:       sound.checked,
       stats:       stats.checked,
-      footprints:  footprints.checked,
-      predictions: predictions.checked
+//      footprints:  footprints.checked,
+//      predictions: predictions.checked
     });
 
     Game.addEvent(sound,       'change', function() { pong.enableSound(sound.checked);           });
     Game.addEvent(stats,       'change', function() { pong.showStats(stats.checked);             });
-    Game.addEvent(footprints,  'chang e', function() { pong.showFootprints(footprints.checked);   });
-    Game.addEvent(predictions, 'change', function() { pong.showPredictions(predictions.checked); });
+
 
     // Store frame for motion functions
     var previousFrame = null;
