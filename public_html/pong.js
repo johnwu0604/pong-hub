@@ -217,8 +217,8 @@ Pong = {
       this.supported = Game.ua.hasAudio;
       if (this.supported) {
         this.files = {
-          ping: Game.createAudio("sounds/ping.wav"),
-          pong: Game.createAudio("sounds/pong.wav"),
+          ping: Game.createAudio("sounds/Donald_Trump.wav"),
+          pong: Game.createAudio("sounds/Clinton_Laugh.wav"),
           wall: Game.createAudio("sounds/wall.wav"),
           goal: Game.createAudio("sounds/goal.wav")
         };
