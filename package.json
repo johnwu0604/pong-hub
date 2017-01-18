@@ -1,0 +1,11 @@
+{
+  "name": "john-wu",
+  "version": "0.0.0",
+  "description": "Personal website",
+  "main": "server.js",
+  "author": "John Wu",
+  "dependencies": {
+    "express": "^4.13.4"
+
+  }
+}
